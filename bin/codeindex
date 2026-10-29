@@ -1,0 +1,11 @@
+#!/bin/sh
+# Prefer the repo-local venv, fall back to whatever python is on PATH, so the
+# tool still runs when installed with pipx/uv or into a shared environment.
+ROOT="$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)"
+if [ -x "$ROOT/.venv/bin/python" ]; then
+  PY="$ROOT/.venv/bin/python"
+else
+  PY="$(command -v python3 || command -v python)"
+fi
+[ -n "$PY" ] || { echo "codeindex: no python found on PATH" >&2; exit 1; }
+exec "$PY" -c 'import sys; sys.path.insert(0, sys.argv.pop(1)); from codeindex.cli import main; sys.exit(main())' "$ROOT/src" "$@"

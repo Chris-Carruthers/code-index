@@ -1,3 +1,5 @@
+<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/dde410a0-1d3b-49b9-825a-cd616ec3a301" />
+
 # code-index
 
 An AST-backed code index over every git checkout on your machine, built for
